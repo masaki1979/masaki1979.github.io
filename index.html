@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>masaki1979</title>
+<meta name="description" content="Personal website of masaki1979, operator of Personal Video Scheduler, a private tool for scheduling uploads to the operator's own channels.">
+<style>
+:root{
+  --bg:#fafaf8; --fg:#1d1d1f; --muted:#595960; --line:#dcdcd6; --card:#ffffff;
+  --accent:#1a56b0; --note:#eef3fb; --note-line:#c9d8f0;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#131316; --fg:#e8e8ec; --muted:#a4a4ad; --line:#34343b; --card:#1b1b20;
+    --accent:#8ab4f8; --note:#1a2232; --note-line:#2e3d58;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:system-ui,-apple-system,"Segoe UI","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic UI",Meiryo,sans-serif;
+  font-size:16px; line-height:1.7;
+}
+.wrap{max-width:46rem; margin:0 auto; padding:0 16px}
+header.site{border-bottom:1px solid var(--line); background:var(--card)}
+header.site .wrap{padding-top:14px; padding-bottom:10px}
+.brand{font-weight:700; margin:0 0 6px}
+nav.site-nav{display:flex; flex-wrap:wrap; gap:4px 16px; font-size:.95rem}
+nav.site-nav a[aria-current="page"]{font-weight:700; text-decoration:none; color:var(--fg)}
+main{padding:8px 0 32px}
+h1{font-size:1.65rem; line-height:1.3; margin:24px 0 12px}
+h2{font-size:1.2rem; margin:28px 0 8px; padding-top:4px}
+a{color:var(--accent); overflow-wrap:anywhere}
+p,li{overflow-wrap:break-word}
+.note{background:var(--note); border:1px solid var(--note-line); border-radius:8px; padding:12px 16px; margin:16px 0}
+.links{list-style:none; padding:0; margin:12px 0}
+.links li{margin:0 0 10px; padding:12px 16px; background:var(--card); border:1px solid var(--line); border-radius:8px}
+.links a{font-weight:600}
+.muted{color:var(--muted)}
+.lang-switch{font-size:.9rem; margin:12px 0 0}
+hr.lang-sep{border:0; border-top:2px solid var(--line); margin:40px 0 8px}
+footer.site{border-top:1px solid var(--line); color:var(--muted); font-size:.9rem}
+footer.site .wrap{padding-top:14px; padding-bottom:24px}
+footer.site nav.site-nav{margin-bottom:8px}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <p class="brand">masaki1979</p>
+    <nav class="site-nav" aria-label="Site">
+      <a href="index.html" aria-current="page">Top</a>
+      <a href="personal-video-scheduler/index.html">App Home</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="lang-switch"><a href="#ja" lang="ja">日本語はこちら</a></p>
+
+  <section lang="en">
+    <h1>masaki1979</h1>
+    <p>This is the personal website of <strong>masaki1979</strong>, an individual YouTube creator. It hosts the home page, privacy policy, and terms of service for a small tool I built for my own use.</p>
+
+    <h2>Application</h2>
+    <ul class="links">
+      <li>
+        <a href="personal-video-scheduler/index.html">Personal Video Scheduler</a><br>
+        <span class="muted">A personal tool that schedules uploads of my own videos to YouTube channels that I own or manage. It is not offered to the public.</span>
+      </li>
+    </ul>
+
+    <h2>Policies</h2>
+    <ul class="links">
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="terms.html">Terms of Service</a></li>
+    </ul>
+
+    <h2>Operator and contact</h2>
+    <p>Operator: masaki1979<br>
+    Email: <a href="mailto:masaki.1979ai@gmail.com">masaki.1979ai@gmail.com</a></p>
+
+    <div class="note">
+      <p style="margin:0">Personal Video Scheduler uses YouTube API Services. It is an independent personal tool and is not affiliated with, endorsed by, or sponsored by Google or YouTube.</p>
+    </div>
+  </section>
+
+  <hr class="lang-sep">
+
+  <section id="ja" lang="ja">
+    <h1>masaki1979（日本語）</h1>
+    <p>個人で YouTube の動画を作っている <strong>masaki1979</strong> のウェブサイトです。自分で使うために作った小さなツールのホームページ、プライバシーポリシー、利用規約を置いています。</p>
+
+    <h2>アプリ</h2>
+    <ul class="links">
+      <li>
+        <a href="personal-video-scheduler/index.html">Personal Video Scheduler（個人用の動画予約投稿ツール）</a><br>
+        <span class="muted">自分の動画を、自分が所有・管理する YouTube チャンネルに予約投稿するための個人用ツールです。一般には公開していません。</span>
+      </li>
+    </ul>
+
+    <h2>ポリシー</h2>
+    <ul class="links">
+      <li><a href="privacy.html#ja">プライバシーポリシー</a></li>
+      <li><a href="terms.html#ja">利用規約</a></li>
+    </ul>
+
+    <h2>運営者と連絡先</h2>
+    <p>運営者：masaki1979<br>
+    メール：<a href="mailto:masaki.1979ai@gmail.com">masaki.1979ai@gmail.com</a></p>
+
+    <div class="note">
+      <p style="margin:0">Personal Video Scheduler は YouTube API Services を使っています。Google や YouTube とは無関係の個人のツールであり、Google や YouTube が提供・承認・後援しているものではありません。</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <nav class="site-nav" aria-label="Site (footer)">
+      <a href="index.html" aria-current="page">Top</a>
+      <a href="personal-video-scheduler/index.html">App Home</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </nav>
+    <p style="margin:0">&copy; 2026 masaki1979. Not affiliated with Google or YouTube. / Google・YouTube とは無関係の個人サイトです。</p>
+  </div>
+</footer>
+</body>
+</html>
