@@ -65,7 +65,7 @@ footer.site nav.site-nav{margin-bottom:8px}
 
   <section lang="en">
     <h1>Privacy Policy</h1>
-    <p class="meta">Personal Video Scheduler &middot; Effective date: October 3, 2026</p>
+    <p class="meta">Personal Video Scheduler &middot; Effective date: October 4, 2026 (first published October 3, 2026)</p>
 
     <div class="note">
       <p><strong>Personal Video Scheduler uses YouTube API Services.</strong> By using this app, you are also subject to the <a href="http://www.google.com/policies/privacy">Google Privacy Policy</a> (http://www.google.com/policies/privacy).</p>
@@ -80,39 +80,51 @@ footer.site nav.site-nav{margin-bottom:8px}
 
     <h2 id="en-3">3. Information the App accesses</h2>
     <ul>
-      <li><strong>OAuth tokens:</strong> the access token and refresh token that Google issues when the App is authorized for a channel. The App uses them only to call YouTube API Services for that channel.</li>
-      <li><strong>Information about the authorized channel:</strong> the channel ID and channel name, used only to tell the Operator's channels apart and to confirm which channel a video will be uploaded to.</li>
-      <li><strong>Information about the channel's videos:</strong> title, scheduled publish time, privacy status, and video ID of videos that are already scheduled or published. Although the <code>youtube.readonly</code> permission would allow reading other channel information, the App reads only this information.</li>
-      <li><strong>Videos and metadata the Operator uploads:</strong> the video file, thumbnail image, and the settings entered by the Operator (title, description, tags, category, language, made-for-kids declaration, altered or synthetic content declaration, paid promotion declaration, and scheduled publish time).</li>
+      <li><strong>OAuth tokens:</strong> the access token and refresh token that Google issues when the App is authorized, the permissions (scopes) that were granted, and the token's expiry time. The App uses them only to call YouTube API Services for the authorized channel.</li>
+      <li><strong>Information about the authorized channel:</strong> the channel ID, channel name, channel handle, and the ID of the channel's list of uploaded videos. These are used only to tell the Operator's channels apart, to confirm that a video is uploaded to the intended channel, and to find the channel's videos.</li>
+      <li><strong>Information about the channel's videos:</strong> for videos that are already uploaded, scheduled, or published: video ID, title, publish date and time (or upload date and time for videos that are not yet public), scheduled publish time, privacy status, and video length (used to tell Shorts from long-form videos).</li>
+      <li><strong>Status details:</strong> for videos uploaded by the App, and for up to 10 videos found during the duplicate check that may be an earlier attempt of the same upload (videos with the same title, and videos that were uploaded after that attempt started — from 10 minutes before it — and are not recorded by the App), the App also reads the upload and processing status and the reason for a failure or rejection if any. For videos uploaded by the App, it also reads the made-for-kids, altered or synthetic content, and paid promotion declarations, to confirm that the settings were applied. When the Operator asks the App to record a video that the Operator found in YouTube Studio as the result of an earlier attempt, the App reads that video's channel ID, title, publish date, and status (including the reason for a failure or rejection, if any) to confirm it, and records it only if it belongs to the intended channel, is not already recorded, and did not fail.</li>
+      <li><strong>Videos and metadata the Operator uploads:</strong> the video file, thumbnail image, title, description, tags, the privacy setting chosen by the Operator (private, unlisted, or public; private by default — the schedule command always adds a scheduled publish time, and the post command adds one when the Operator gives it), the scheduled publish time, and default values set by the Operator (category, language, made-for-kids declaration, altered or synthetic content declaration, and paid promotion declaration).</li>
+      <li><strong>Upload session information:</strong> the temporary upload address that YouTube returns for an upload, and the progress information YouTube sends back during the upload. These are used only to resume an interrupted upload.</li>
     </ul>
-    <p>The App does not access comments, subscribers, analytics, payment information, contacts, email, or any other Google service.</p>
+    <p>Although the <code>youtube.readonly</code> permission would allow reading other channel information, the App requests only the information listed above. When YouTube returns more than was requested (for example, in its response to an upload), the App uses and stores only the items listed above. The App does not access comments, subscribers, analytics, payment information, contacts, email, or any other Google service.</p>
 
     <h2 id="en-4">4. How the information is used</h2>
     <p>The information is used only to:</p>
     <ul>
-      <li>upload and schedule videos (including setting thumbnails and video settings), and</li>
-      <li>find a free date and time that is not already used by a scheduled or published video.</li>
+      <li>upload and schedule videos (including setting thumbnails and video settings), and resume interrupted uploads;</li>
+      <li>confirm that an upload finished and that the settings were applied;</li>
+      <li>find a free date and time that is not already used by a scheduled or published video, and avoid uploading the same video twice.</li>
     </ul>
     <p>It is not used for any other purpose, such as advertising, profiling, or analytics.</p>
 
     <h2 id="en-5">5. Where the information is stored</h2>
+    <p>All information is stored only on the device where the App runs (the Operator's own computer), inside the Operator's user folder. The App has no server, and the Operator does not store the information in any cloud service. The App stores:</p>
     <ul>
-      <li>All information is stored only on the Operator's own computer. The App has no server, and the Operator does not store the information in any cloud service.</li>
-      <li>OAuth tokens are stored in a file inside the Operator's user folder on that computer.</li>
-      <li>A local posting log (video ID and scheduled publish time of videos uploaded by the App) is kept on the same computer.</li>
-      <li>Information about the channel's videos is read from the API when needed to check for free time slots.</li>
+      <li><strong>Token files (one per channel):</strong> the refresh token, the granted permissions, the date of authorization, the client ID of the App that issued the token and the name of the App's client settings file, the name the Operator gave to the channel in the App, the channel ID, channel name and handle, the date this channel information was last checked (or a short note that it was deleted), the version of the Privacy Policy and Terms that was agreed to and the date and time of the agreement, and, if access stops working or is revoked, the date the App noticed this. If a revocation cannot be completed at once, a small marker file with the same dates is kept until the deletion is finished.</li>
+      <li><strong>Posting log:</strong> for each video upload by the App, including uploads that failed or were interrupted, the Operator's own settings (such as the title and which title option was used, the description file if one was specified, the privacy setting, and the scheduled publish time) and the progress of the upload, and, from the API, the video ID and URL, the channel name and ID, the upload status, privacy status, scheduled publish time and processing status as registered on YouTube, and the date this information was last checked. The posting log file is also read and written, on the same computer, by the posting tool that the Operator used before this App; its contents are not sent anywhere.</li>
+      <li><strong>Test upload log:</strong> the same kind of information for very short test uploads, which are always private, together with the location of the test video file on the computer.</li>
+      <li><strong>Temporary upload session files:</strong> for an upload in progress, the upload address, the name of the video folder, the content ID the App uses to recognize the same upload, whether it is a Short, the channel name in the App, the file name, size and modification time, and the creation time. A session file is deleted when the upload is completed, when access is revoked, or 7 days after it was created. There are two exceptions: if the posting log is in use by another task when the file is due to be deleted, the file is kept until the next opportunity, for at most 10 days; and if YouTube has confirmed that the upload finished but the posting log could not be updated, the file is kept until the posting log is updated, for at most 27 days.</li>
+      <li><strong>Refresh log:</strong> a log of the daily automatic refresh (date, result, and counts). Video IDs and other information obtained from YouTube API Services are not written to it, and lines older than 30 days are deleted.</li>
     </ul>
+    <p>Lists of videos read to find free dates, to prevent duplicate uploads, or to confirm an upload are only shown on the screen and are not stored. Error messages returned by the API are not stored. The App does not place, read, or recognize cookies or similar technologies.</p>
 
     <h2 id="en-6">6. Sharing</h2>
     <ul>
       <li>The information is not shared with, sold to, or rented to any third party.</li>
-      <li>The App sends information only to Google / YouTube through YouTube API Services, for the purposes described above.</li>
-      <li>The App does not use advertising, analytics, tracking, or cookies.</li>
+      <li>The App sends information obtained from YouTube API Services only to Google / YouTube, for the purposes described above.</li>
+      <li>During a transition period, for the Operator's main channel only, the App also reads the list of posts the Operator has scheduled with Upload-Post, a posting service that the Operator used before this App, using the Operator's own Upload-Post account and API key. This is done only to avoid scheduling two videos on the same day, and the list is not stored. Only this read request is sent to Upload-Post; no information obtained from YouTube API Services is sent to it.</li>
+      <li>The App does not allow any third party to serve content or advertisements through it, or to collect information from its users. The App does not use advertising, analytics, tracking, or cookies.</li>
     </ul>
 
     <h2 id="en-7">7. Retention of API data</h2>
-    <p>Data obtained from YouTube API Services (other than tokens needed to keep the App authorized) is not kept for more than 30 days without being refreshed. Any such data that the App stores, including the posting log, is deleted or refreshed with current data from the API within 30 days.</p>
-    <p>OAuth tokens are kept until access is revoked or the token file is deleted.</p>
+    <ul>
+      <li>Data obtained from YouTube API Services that the App stores (the API information in the posting log and the test upload log, and the channel information in the token files) is refreshed with current data from the API once it is more than 19 days old, so that it is refreshed within 20 days. Information that cannot be refreshed is deleted after 27 days, before it becomes 30 days old. This is done whenever the App is used to check, plan, post, schedule, or check the status of an upload, and by an automatic refresh that runs once a day on the Operator's computer.</li>
+      <li>If a video can no longer be found, the App checks it again at the next opportunity and, if it is still not found, deletes its API information from the posting log. For uploads that were interrupted, the API information is deleted after 27 days, while the Operator's own record that an upload was attempted is kept so that the same video is not uploaded twice.</li>
+      <li>If access is revoked from your Google Account settings, the App deletes the refresh token that no longer works as soon as it notices this, and deletes the stored API data for that channel 22 days after noticing it (within 30 days in any case).</li>
+      <li>If this Privacy Policy or the Terms are updated, the App does not read information from YouTube for a channel until the new version has been agreed to (deletion under the rules above continues).</li>
+      <li>OAuth tokens are kept only as long as they are needed to keep the App authorized.</li>
+    </ul>
 
     <h2 id="en-8">8. How to revoke access</h2>
     <p>You can revoke the App's access to your Google Account at any time:</p>
@@ -120,19 +132,22 @@ footer.site nav.site-nav{margin-bottom:8px}
       <li>Google Account, "Third-party apps &amp; services": <a href="https://myaccount.google.com/connections">https://myaccount.google.com/connections</a></li>
       <li>Google security settings page: <a href="https://security.google.com/settings/security/permissions">https://security.google.com/settings/security/permissions</a></li>
     </ul>
+    <p>The App also has its own command to revoke access. When it is used and a usable token is stored, the App immediately asks Google to revoke the access, then deletes the API data stored for that channel, the upload session files, and the token file. If Google accepts the revocation, the same is done for any other name the Operator saved for the same channel; otherwise the App tells the Operator to revoke each name. If no usable token is stored, the App deletes the stored data and asks you to remove the access from your Google Account settings (links above). If any deletion cannot be finished at once, the App finishes it the next time it runs, and in any case within 7 days.</p>
     <p>After access is revoked, the App can no longer read or upload anything for that account.</p>
+    <p><strong>Deleting data stored by the App does not affect any data stored by YouTube.</strong> Videos uploaded with the App stay on YouTube. To delete them, use YouTube Studio or another app that supports deleting videos.</p>
 
     <h2 id="en-9">9. How to request deletion</h2>
-    <p>You can ask for your stored information (for example, tokens and posting log entries related to your channel) to be deleted by sending an email to <a href="mailto:masaki.1979ai@gmail.com">masaki.1979ai@gmail.com</a>. The Operator will delete it within 7 days of receiving the request and will reply to confirm.</p>
+    <p>You can ask for your stored information (for example, tokens and posting log entries related to your channel) to be deleted by sending an email to <a href="mailto:masaki.1979ai@gmail.com">masaki.1979ai@gmail.com</a>. The Operator will delete it within 7 days of receiving the request and will reply to confirm. Deleting data stored by the App does not delete videos or other data stored by YouTube; to delete those, use YouTube Studio.</p>
 
     <h2 id="en-10">10. Security</h2>
-    <p>Tokens and other stored information are kept only on the Operator's computer, inside the Operator's user folder, and are not published or sent anywhere other than to Google / YouTube.</p>
+    <p>Tokens and other stored information are kept only on the Operator's computer, inside the Operator's user folder, and are not published. Google tokens are sent only to Google, and the Operator's Upload-Post API key is sent only to Upload-Post.</p>
 
     <h2 id="en-11">11. Website</h2>
     <p>This website is hosted on GitHub Pages. The website itself uses no cookies, analytics, or tracking scripts. GitHub, as the hosting provider, may log technical information such as visitors' IP addresses; see the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub General Privacy Statement</a>.</p>
 
     <h2 id="en-12">12. Changes to this policy</h2>
     <p>If this policy changes, the updated version will be posted on this page and the effective date above will be updated. Significant changes will be noted on this page.</p>
+    <p><strong>Changes on October 4, 2026:</strong> listed in detail the information the App reads and stores, including status details, upload session information and the privacy setting choices (sections 3 and 5); added purposes: resuming interrupted uploads, confirming uploads and their settings, and preventing duplicate uploads (section 4); added the transition-period use of Upload-Post and the statement on third parties (sections 6 and 10); described the retention periods and what happens when this policy is updated (section 7); added the App's own revoke command and what deleting data does not affect (sections 8 and 9). The App now asks users to agree to this policy and the Terms before authorization, and to agree again after they are updated (Terms, section 3).</p>
 
     <h2 id="en-13">13. Contact</h2>
     <p>Operator: masaki1979<br>
@@ -143,7 +158,7 @@ footer.site nav.site-nav{margin-bottom:8px}
 
   <section id="ja" lang="ja">
     <h1>プライバシーポリシー</h1>
-    <p class="meta">Personal Video Scheduler（個人用の動画予約投稿ツール）・施行日：2026年10月3日</p>
+    <p class="meta">Personal Video Scheduler（個人用の動画予約投稿ツール）・施行日：2026年10月4日（初版の公開：2026年10月3日）</p>
     <p class="muted" style="font-size:.9rem">英語版と日本語版の内容は同じです。食い違いがある場合は英語版を優先します。</p>
 
     <div class="note">
@@ -159,39 +174,51 @@ footer.site nav.site-nav{margin-bottom:8px}
 
     <h2>3. 本アプリが読み取る情報</h2>
     <ul>
-      <li><strong>OAuth のトークン：</strong>チャンネルについて本アプリを許可したときに Google が発行するアクセストークンと更新用トークン。そのチャンネルについて YouTube API Services を呼び出すためだけに使います。</li>
-      <li><strong>許可されたチャンネルの情報：</strong>チャンネル ID とチャンネル名。運営者の複数のチャンネルを見分け、どのチャンネルにアップロードするかを確かめるためだけに使います。</li>
-      <li><strong>チャンネルの動画の情報：</strong>予約済み・公開済みの動画のタイトル、公開予定時刻、公開状態、動画 ID。<code>youtube.readonly</code> の許可ではほかのチャンネル情報も読めますが、本アプリが読むのはこれらの情報だけです。</li>
-      <li><strong>運営者がアップロードする動画とメタデータ：</strong>動画ファイル、サムネイル画像、運営者が入力した設定（タイトル、説明、タグ、カテゴリー、言語、子ども向けの申告、改変または合成コンテンツの申告、有料プロモーションの申告、公開予定時刻）。</li>
+      <li><strong>OAuth のトークン：</strong>本アプリを許可したときに Google が発行するアクセストークンと更新用トークン、許可された権限（スコープ）、トークンの有効期限。許可されたチャンネルについて YouTube API Services を呼び出すためだけに使います。</li>
+      <li><strong>許可されたチャンネルの情報：</strong>チャンネル ID、チャンネル名、ハンドル、そのチャンネルのアップロード動画の一覧の ID。運営者のチャンネルを見分け、意図したチャンネルにアップロードすることを確かめ、チャンネルの動画を探すためだけに使います。</li>
+      <li><strong>チャンネルの動画の情報：</strong>アップロード済み・予約済み・公開済みの動画の動画 ID、タイトル、公開日時（まだ公開されていない動画はアップロード日時）、公開予定時刻、公開状態、動画の長さ（ショートと通常の動画を見分けるため）。</li>
+      <li><strong>状態の詳しい情報：</strong>本アプリでアップロードした動画と、二重アップロードの確認で見つかった「同じアップロードの前回の試みかもしれない動画」（タイトルが同じもの、その試みを始めた時刻（の10分前）より後にアップロードされ本アプリの記録に無いもの。10本まで）については、アップロードと処理の状況、失敗や却下の理由（ある場合）も読みます。本アプリでアップロードした動画については、子ども向けの申告・改変または合成コンテンツの申告・有料プロモーションの申告も読み、設定が反映されたことを確かめます。運営者が YouTube Studio で見つけた「前回の試みでできた動画」を記録に取り込むよう指示したときは、その動画のチャンネル ID、タイトル、公開日時、状態（失敗や却下の理由がある場合はそれも）を読んで確かめ、意図したチャンネルの動画で、まだ記録に無く、失敗していないときだけ記録します。</li>
+      <li><strong>運営者がアップロードする動画とメタデータ：</strong>動画ファイル、サムネイル画像、タイトル、説明、タグ、運営者が選んだ公開設定（非公開・限定公開・公開。既定は非公開。予約のコマンドはいつも公開予定時刻を付け、投稿のコマンドは運営者が指定したときに付けます）、公開予定時刻、運営者が決めた既定値（カテゴリー、言語、子ども向けの申告、改変または合成コンテンツの申告、有料プロモーションの申告）。</li>
+      <li><strong>アップロードのセッションの情報：</strong>アップロードのときに YouTube が返す一時的なアップロード先と、アップロード中に YouTube が返す進み具合の情報。途中で止まったアップロードを続きから送るためだけに使います。</li>
     </ul>
-    <p>コメント、登録者、アナリティクス、支払い情報、連絡先、メール、そのほかの Google のサービスにはアクセスしません。</p>
+    <p><code>youtube.readonly</code> の許可ではほかのチャンネル情報も読めますが、本アプリが求めるのは上に挙げた情報だけです。YouTube が求めた以上の情報を返した場合（たとえばアップロードへの応答）も、本アプリが使い、保存するのは上に挙げた項目だけです。コメント、登録者、アナリティクス、支払い情報、連絡先、メール、そのほかの Google のサービスにはアクセスしません。</p>
 
     <h2>4. 情報の使い道</h2>
     <p>情報は次の目的だけに使います。</p>
     <ul>
-      <li>動画のアップロードと予約公開（サムネイルや動画の設定を含む）</li>
-      <li>予約済み・公開済みの動画と重ならない、空いている日時の判定</li>
+      <li>動画のアップロードと予約公開（サムネイルや動画の設定を含む）、途中で止まったアップロードの再開</li>
+      <li>アップロードが終わったことと、設定が反映されたことの確認</li>
+      <li>予約済み・公開済みの動画と重ならない、空いている日時の判定と、同じ動画の二重アップロードの防止</li>
     </ul>
     <p>広告、プロファイリング、解析など、ほかの目的には使いません。</p>
 
     <h2>5. 情報の保存場所</h2>
+    <p>情報はすべて、本アプリが動く端末（運営者のパソコン）の中、運営者のユーザーフォルダ内だけに保存します。本アプリにはサーバーがなく、運営者がクラウドサービスに保存することもありません。保存するものは次のとおりです。</p>
     <ul>
-      <li>情報はすべて運営者のパソコンの中だけに保存します。本アプリにはサーバーがなく、運営者がクラウドサービスに保存することもありません。</li>
-      <li>OAuth のトークンは、そのパソコンの運営者のユーザーフォルダ内のファイルに保存します。</li>
-      <li>投稿記録（本アプリでアップロードした動画の動画 ID と公開予定時刻）も同じパソコンの中に保存します。</li>
-      <li>チャンネルの動画の情報は、空いている日時を確認するときに、その都度 API から読み取ります。</li>
+      <li><strong>トークンのファイル（チャンネルごと）：</strong>更新用トークン、許可された権限、許可した日時、トークンを発行した本アプリのクライアント ID とクライアントの設定ファイルの名前、運営者が本アプリの中でチャンネルに付けた名前、チャンネル ID・チャンネル名・ハンドル、これらのチャンネル情報を最後に確かめた日時（削除した場合はその旨の短い注記）、同意したプライバシーポリシーと利用規約の版と同意した日時、許可が使えなくなったり取り消されたりした場合は本アプリがそれに気づいた日時。取り消しの削除をその場で終えられなかった場合は、同じ日時を書いた小さな印のファイルを、削除が終わるまで残します。</li>
+      <li><strong>投稿記録：</strong>本アプリによるアップロードごと（失敗・中断したものを含む）に、運営者自身の設定（タイトルと使ったタイトル候補の番号、指定した場合は説明のファイルの場所、公開設定、公開予定時刻など）とアップロードの進み具合、API から得た動画 ID と URL、チャンネル名と ID、YouTube に登録されたアップロードの状態・公開状態・公開予定時刻・処理の状況、これらを最後に確かめた日時。投稿記録のファイルは、同じパソコンの中で、本アプリの前に運営者が使っていた投稿ツールも読み書きします。その中身をどこかに送ることはありません。</li>
+      <li><strong>テスト送信の記録：</strong>ごく短いテスト動画のアップロード（いつも非公開）についての、投稿記録と同じ種類の情報と、パソコンの中のテスト動画の場所。</li>
+      <li><strong>アップロードのセッションの一時ファイル：</strong>アップロード中の動画について、アップロード先、動画のフォルダ名、同じアップロードを見分けるための内容 ID、ショートかどうか、本アプリの中のチャンネル名、ファイル名・大きさ・更新日時、作成日時。アップロードが終わったとき、許可を取り消したとき、または作成から 7 日たったときに削除します。例外が2つあります。削除するときに投稿記録がほかの処理で使われていた場合は、次の機会まで（最長 10 日）残します。アップロードが最後まで届いたと YouTube で確かめられたのに投稿記録を更新できなかった場合は、投稿記録を更新できるまで（最長 27 日）残します。</li>
+      <li><strong>取り直しの記録（ログ）：</strong>1日1回の自動の取り直しの記録（日時、結果、件数）。動画 ID など YouTube API Services から得た情報は書かず、30 日より古い行は削除します。</li>
     </ul>
+    <p>空いている日時の判定、二重アップロードの防止、アップロードの確認のために読んだ動画の一覧は、画面に表示するだけで保存しません。API が返したエラーの文も保存しません。本アプリは Cookie やそれに似た技術を置いたり、読んだり、利用したりしません。</p>
 
     <h2>6. 共有</h2>
     <ul>
       <li>情報を第三者に共有・販売・貸与することはありません。</li>
-      <li>本アプリが情報を送る先は、上記の目的のために YouTube API Services を通じて送る Google / YouTube だけです。</li>
-      <li>広告、解析、トラッキング、Cookie は使いません。</li>
+      <li>YouTube API Services から得た情報を送る先は、上記の目的のための Google / YouTube だけです。</li>
+      <li>移行期間中は、運営者のメインのチャンネルについてだけ、本アプリの前に運営者が使っていた投稿サービス Upload-Post から、運営者が予約した投稿の一覧を、運営者自身の Upload-Post のアカウントと API キーで読み取ります。同じ日に2本の動画を予約しないためだけに行い、一覧は保存しません。Upload-Post に送るのはこの読み取りの依頼だけで、YouTube API Services から得た情報は送りません。</li>
+      <li>本アプリを通じて、第三者にコンテンツや広告を配信させたり、利用者から情報を集めさせたりすることはありません。広告、解析、トラッキング、Cookie は使いません。</li>
     </ul>
 
     <h2>7. API から得たデータの保存期間</h2>
-    <p>YouTube API Services から得たデータ（本アプリの許可を保つために必要なトークンを除く）は、取り直さないまま 30 日を超えて保存しません。本アプリが保存するこうしたデータ（投稿記録を含む）は、30 日以内に削除するか、API から最新のデータを取り直して更新します。</p>
-    <p>OAuth のトークンは、許可が取り消されるか、トークンのファイルが削除されるまで保存します。</p>
+    <ul>
+      <li>本アプリが保存する YouTube API Services から得たデータ（投稿記録とテスト送信の記録の中の API の情報、トークンのファイルの中のチャンネル情報）は、19 日を過ぎたら API から最新のデータを取り直し、20 日以内に取り直します。取り直せない情報は、30 日になる前（27 日を過ぎたとき）に削除します。これは、本アプリで確認・計画・投稿・予約・状況の確認をするたびと、運営者のパソコンで 1 日 1 回動く自動の取り直しで行います。</li>
+      <li>動画が見つからなくなった場合は、次の機会にもう一度確かめ、やはり見つからなければ、その動画の API の情報を投稿記録から削除します。途中で止まったアップロードについては、API の情報を 27 日を過ぎたときに削除します。ただし、同じ動画を2回アップロードしないように、アップロードを試みたという運営者自身の記録は残します。</li>
+      <li>Google アカウントの設定から許可が取り消された場合、本アプリはそれに気づいた時点で使えなくなった更新用トークンを削除し、そのチャンネルについて保存している API のデータを、気づいてから 22 日たったときに（どの場合も 30 日以内に）削除します。</li>
+      <li>このプライバシーポリシーまたは利用規約が更新された場合、新しい版に同意するまで、本アプリはそのチャンネルについて YouTube から情報を読みません（上の決まりによる削除は続けます）。</li>
+      <li>OAuth のトークンは、本アプリの許可を保つために必要な間だけ保存します。</li>
+    </ul>
 
     <h2>8. 許可の取り消し方</h2>
     <p>本アプリへの Google アカウントの許可は、次のページからいつでも取り消せます。</p>
@@ -199,19 +226,22 @@ footer.site nav.site-nav{margin-bottom:8px}
       <li>Google アカウントの「サードパーティ製のアプリとサービス」：<a href="https://myaccount.google.com/connections">https://myaccount.google.com/connections</a></li>
       <li>Google のセキュリティ設定のページ：<a href="https://security.google.com/settings/security/permissions">https://security.google.com/settings/security/permissions</a></li>
     </ul>
+    <p>本アプリにも許可を取り消すコマンドがあります。使えるトークンが保存されているときにこれを使うと、本アプリはすぐに Google に許可の取り消しを依頼し、そのチャンネルについて保存している API のデータ、アップロードのセッションのファイル、トークンのファイルを削除します。Google が取り消しを受け付けた場合は、運営者が同じチャンネルを別の名前でも保存していれば、その名前の分も同じように削除します。受け付けなかった場合は、名前ごとに取り消すよう運営者に案内します。使えるトークンが保存されていないときは、保存しているデータを削除し、Google アカウントの設定（上のリンク）から許可を外すよう案内します。削除の一部をその場で終えられなかった場合は、次に本アプリが動いたときに終え、どの場合も 7 日以内に終えます。</p>
     <p>許可を取り消すと、本アプリはそのアカウントについて読み取りもアップロードもできなくなります。</p>
+    <p><strong>本アプリが保存したデータを削除しても、YouTube に保存されているデータには影響しません。</strong>本アプリでアップロードした動画は YouTube に残ります。動画を削除するときは、YouTube Studio など、動画の削除に対応したアプリを使ってください。</p>
 
     <h2>9. 削除の依頼方法</h2>
-    <p>保存されている情報（たとえば、あなたのチャンネルに関するトークンや投稿記録）の削除は、<a href="mailto:masaki.1979ai@gmail.com">masaki.1979ai@gmail.com</a> へのメールで依頼できます。運営者は依頼を受け取ってから 7 日以内に削除し、削除したことを返信でお知らせします。</p>
+    <p>保存されている情報（たとえば、あなたのチャンネルに関するトークンや投稿記録）の削除は、<a href="mailto:masaki.1979ai@gmail.com">masaki.1979ai@gmail.com</a> へのメールで依頼できます。運営者は依頼を受け取ってから 7 日以内に削除し、削除したことを返信でお知らせします。本アプリが保存したデータを削除しても、YouTube に保存されている動画などのデータは削除されません。それらを削除するときは YouTube Studio を使ってください。</p>
 
     <h2>10. 安全管理</h2>
-    <p>トークンなどの保存した情報は、運営者のパソコンのユーザーフォルダ内だけに置き、Google / YouTube 以外に公開したり送ったりしません。</p>
+    <p>トークンなどの保存した情報は、運営者のパソコンのユーザーフォルダ内だけに置き、公開しません。Google のトークンは Google にだけ、運営者の Upload-Post の API キーは Upload-Post にだけ送ります。</p>
 
     <h2>11. このウェブサイトについて</h2>
     <p>このウェブサイトは GitHub Pages で公開しています。サイト自体は Cookie、解析、トラッキング用のスクリプトを使っていません。ホスティング事業者である GitHub が、閲覧者の IP アドレスなどの技術的な情報を記録することがあります。<a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub のプライバシーに関する声明</a>をご覧ください。</p>
 
     <h2>12. ポリシーの変更</h2>
     <p>このポリシーを変更する場合は、このページに新しい内容を載せ、上の施行日を更新します。大きな変更がある場合は、このページでその旨をお知らせします。</p>
+    <p><strong>2026年10月4日の変更：</strong>本アプリが読み取る情報・保存する情報（状態の詳しい情報、アップロードのセッションの情報、公開設定の選択肢を含む）をくわしく書きました（3・5章）。使い道に、中断したアップロードの再開、アップロードと設定の確認、二重アップロードの防止を加えました（4章）。移行期間中の Upload-Post の利用と、第三者についての一文を加えました（6・10章）。保存期間と、このポリシーが更新されたときの扱いを書きました（7章）。本アプリ自身の許可の取り消しコマンドと、データを削除しても影響しないものを加えました（8・9章）。本アプリは、許可の前にこのポリシーと利用規約への同意を求め、更新されたときは同意し直しを求めるようになりました（利用規約3章）。</p>
 
     <h2>13. 連絡先</h2>
     <p>運営者：masaki1979<br>

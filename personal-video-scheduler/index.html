@@ -91,18 +91,20 @@ footer.site nav.site-nav{margin-bottom:8px}
     <h2>Main features</h2>
     <ul>
       <li><strong>Resumable uploads</strong> of video files, so that an interrupted upload can continue where it stopped.</li>
-      <li><strong>Scheduled publishing:</strong> each video is uploaded as private with a scheduled publish time (<code>privacyStatus: private</code> + <code>publishAt</code>), and YouTube makes it public at that time.</li>
+      <li><strong>Scheduled publishing:</strong> videos are uploaded as private, normally with a scheduled publish time (<code>privacyStatus: private</code> + <code>publishAt</code>), and YouTube makes them public at that time. The operator can also choose to upload a video as unlisted or public without a scheduled time.</li>
       <li><strong>Video settings at upload:</strong> title, description, tags, category, language, made-for-kids declaration, altered or synthetic content declaration, and paid promotion declaration.</li>
       <li><strong>Custom thumbnail</strong> for regular (long-form) videos.</li>
       <li><strong>Finding a free time slot:</strong> the app reads the list of the channel's videos that are already scheduled or published, and picks a date and time that is not yet taken.</li>
+      <li><strong>Safety checks:</strong> before uploading, the app confirms that it is connected to the intended channel and that the same video has not already been uploaded; after uploading, it confirms that the upload finished and that the settings were applied.</li>
     </ul>
 
     <h2>How it works</h2>
     <ol>
+      <li>The operator reads and agrees to the Privacy Policy and the Terms of Service (the app asks for this agreement first).</li>
       <li>The operator signs in with Google and authorizes the app for a channel the operator owns or manages.</li>
       <li>The app reads the channel's scheduled and published videos to see which dates and times are already used.</li>
       <li>The operator chooses a video file and its details; the app suggests a free date and time.</li>
-      <li>The app uploads the video as private with the scheduled publish time, then sets the thumbnail if one is provided.</li>
+      <li>The app uploads the video as private with the scheduled publish time (or with the privacy setting the operator chose), then sets the thumbnail if one is provided.</li>
     </ol>
 
     <h2>Google OAuth scopes and why they are needed</h2>
@@ -116,7 +118,7 @@ footer.site nav.site-nav{margin-bottom:8px}
           </tr>
           <tr>
             <td><code>https://www.googleapis.com/auth/youtube.readonly</code></td>
-            <td>To read the channel's already scheduled and published videos (title, scheduled publish time, privacy status, video ID), so that a new video is not scheduled at a time that is already taken.</td>
+            <td>To confirm which channel the app is connected to; to read the channel's already scheduled and published videos so that a new video is not scheduled at a time that is already taken and the same video is not uploaded twice; to confirm that an upload finished and that its settings were applied; and to refresh the stored information within 30 days.</td>
           </tr>
         </tbody>
       </table>
@@ -124,7 +126,7 @@ footer.site nav.site-nav{margin-bottom:8px}
     <p>The app does not request permission to delete videos, manage comments, or access analytics, payments, or any other Google service.</p>
 
     <h2>Your data</h2>
-    <p>All data stays on the operator's own computer. The app sends data only to Google / YouTube through the YouTube API Services. It does not share or sell data, and it uses no advertising, analytics, or cookies. Details are in the <a href="../privacy.html">Privacy Policy</a>.</p>
+    <p>All data stays on the operator's own computer. Data obtained through the YouTube API Services is sent only to Google / YouTube. During a transition period, the app also reads the operator's own list of scheduled posts from Upload-Post (a posting service the operator used before), only to avoid scheduling two videos on the same day; no YouTube data is sent to Upload-Post. The app does not share or sell data, and it uses no advertising, analytics, or cookies. Details are in the <a href="../privacy.html">Privacy Policy</a>.</p>
     <p>You can revoke the app's access at any time from your Google Account: <a href="https://myaccount.google.com/connections">https://myaccount.google.com/connections</a> or <a href="https://security.google.com/settings/security/permissions">https://security.google.com/settings/security/permissions</a>.</p>
 
     <h2>Related policies</h2>
@@ -163,18 +165,20 @@ footer.site nav.site-nav{margin-bottom:8px}
     <h2>主な機能</h2>
     <ul>
       <li><strong>再開可能なアップロード：</strong>途中で途切れても、続きからアップロードできます。</li>
-      <li><strong>予約公開：</strong>動画を「非公開」と公開予定時刻（<code>privacyStatus: private</code> + <code>publishAt</code>）でアップロードし、その時刻に YouTube が公開します。</li>
+      <li><strong>予約公開：</strong>動画を「非公開」で、通常は公開予定時刻つき（<code>privacyStatus: private</code> + <code>publishAt</code>）でアップロードし、その時刻に YouTube が公開します。予約なしで「限定公開」や「公開」を選ぶこともできます。</li>
       <li><strong>アップロード時の設定：</strong>タイトル、説明、タグ、カテゴリー、言語、子ども向けの申告、改変または合成コンテンツの申告、有料プロモーションの申告。</li>
       <li><strong>サムネイルの設定：</strong>本編（通常の長さの動画）にサムネイルを設定します。</li>
       <li><strong>空いている日時の選択：</strong>チャンネルの予約済み・公開済みの動画の一覧を読み取り、まだ使われていない日時を選びます。</li>
+      <li><strong>安全のための確認：</strong>アップロードの前に、意図したチャンネルにつながっていることと、同じ動画がまだアップロードされていないことを確かめます。アップロードの後に、アップロードが終わったことと、設定が反映されたことを確かめます。</li>
     </ul>
 
     <h2>使い方の流れ</h2>
     <ol>
+      <li>運営者がプライバシーポリシーと利用規約を読んで同意します（アプリは最初にこの同意を求めます）。</li>
       <li>運営者が Google でログインし、自分が所有・管理するチャンネルについてアプリを許可します。</li>
       <li>アプリがそのチャンネルの予約済み・公開済みの動画を読み取り、使われている日時を確認します。</li>
       <li>運営者が動画ファイルと設定を選ぶと、アプリが空いている日時を提案します。</li>
-      <li>アプリが動画を「非公開」と公開予定時刻でアップロードし、サムネイルがあれば設定します。</li>
+      <li>アプリが動画を「非公開」と公開予定時刻で（または運営者が選んだ公開設定で）アップロードし、サムネイルがあれば設定します。</li>
     </ol>
 
     <h2>使う Google OAuth スコープと理由</h2>
@@ -188,7 +192,7 @@ footer.site nav.site-nav{margin-bottom:8px}
           </tr>
           <tr>
             <td><code>https://www.googleapis.com/auth/youtube.readonly</code></td>
-            <td>チャンネルの予約済み・公開済みの動画（タイトル、公開予定時刻、公開状態、動画 ID）を読み取り、すでに使われている日時に重ねて予約しないようにするため。</td>
+            <td>つながっているチャンネルを確かめるため。チャンネルの予約済み・公開済みの動画を読み取り、すでに使われている日時に重ねて予約しないようにし、同じ動画を2回アップロードしないようにするため。アップロードが終わったことと設定が反映されたことを確かめるため。保存した情報を30日以内に取り直すため。</td>
           </tr>
         </tbody>
       </table>
@@ -196,7 +200,7 @@ footer.site nav.site-nav{margin-bottom:8px}
     <p>動画の削除、コメントの管理、アナリティクス、支払い、そのほかの Google のサービスへのアクセスは求めません。</p>
 
     <h2>データについて</h2>
-    <p>データはすべて運営者のパソコンの中だけに置きます。データを送る先は、YouTube API Services を通じた Google / YouTube だけです。第三者への共有や販売はせず、広告・解析・Cookie も使いません。くわしくは<a href="../privacy.html#ja">プライバシーポリシー</a>をご覧ください。</p>
+    <p>データはすべて運営者のパソコンの中だけに置きます。YouTube API Services から得たデータを送る先は、Google / YouTube だけです。移行期間中は、同じ日に2本の動画を予約しないためだけに、運営者が前に使っていた投稿サービス Upload-Post から、運営者自身の予約の一覧も読み取ります（Upload-Post に YouTube のデータは送りません）。第三者への共有や販売はせず、広告・解析・Cookie も使いません。くわしくは<a href="../privacy.html#ja">プライバシーポリシー</a>をご覧ください。</p>
     <p>アプリへの許可は、Google アカウントの次のページからいつでも取り消せます：<a href="https://myaccount.google.com/connections">https://myaccount.google.com/connections</a> または <a href="https://security.google.com/settings/security/permissions">https://security.google.com/settings/security/permissions</a></p>
 
     <h2>関連するポリシー</h2>
